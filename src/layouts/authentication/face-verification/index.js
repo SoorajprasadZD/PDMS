@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 // Argon Dashboard 2 MUI components
@@ -8,7 +8,7 @@ import ArgonButton from "components/ArgonButton";
 import { ToastContainer, toast } from "react-toastify";
 
 // Authentication layout components
-import IllustrationLayout from "layouts/authentication/components/IllustrationLayout";
+import IllustrationLayout from "layouts/authentication/components/FaceVerificationIllustrationLayout";
 import { adminLoginService } from "services/loginService";
 import { hospitalLoginService } from "services/loginService";
 import { patientLoginService } from "services/loginService";
@@ -21,37 +21,44 @@ import { setOpenConfigurator } from "context";
 // Argon Dashboard 2 MUI contexts
 import { useArgonController, setAuth } from "context";
 import { Icon } from "@mui/material";
-import Configurator from "layouts/authentication/components/Configurator"
+import Configurator from "layouts/authentication/components/Configurator";
 
 Illustration.propTypes = {
   role: PropTypes.string,
   title: PropTypes.string,
 };
 
-//image
+// document.addEventListener("DOMContentLoaded", function () {
+//   setTimeout(function () {
+//     const urlParams = new URLSearchParams(window.location.search);
+//     const id = urlParams.get("id");
+//     const role = urlParams.get("role");
+//     if (id && role) {
+//       console.log(id)
+//       console.log(role)
+//     }
+//   }, 300);
+// });
 
-const insuranceBG =
-  "https://images.pexels.com/photos/16282318/pexels-photo-16282318/free-photo-of-a-person-filling-in-documents.jpeg?auto=compress&cs=tinysrgb&w=1600";
-const hospitalBG =
-  "https://images.pexels.com/photos/6320167/pexels-photo-6320167.jpeg?auto=compress&cs=tinysrgb&w=1600";
-const patientBG =
-  "https://images.pexels.com/photos/695953/pexels-photo-695953.jpeg?auto=compress&cs=tinysrgb&w=1600";
-const adminBG =
-  "https://images.pexels.com/photos/3143813/pexels-photo-3143813.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
-
-function Illustration({ role, title }) {
+function Illustration() {
+  const [id, setId] = useState("");
+  const [role, setRole] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [controller, dispatch] = useArgonController();
-  const {
-    openConfigurator,
-  } = controller;
-
+  const { openConfigurator } = controller;
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    setId(urlParams.get("id"));
+    setRole(urlParams.get("role"));
+    setEmail(urlParams.get("email"));
+  }, []);
+
   const handleSubmit = async () => {
-    if (email === "" || password === "") {
-      toast("Email or Password cannot be empty");
+    if (!email || !id || !role) {
+      toast("Invalid URL");
     } else {
       switch (role) {
         case "Admin":
@@ -100,16 +107,6 @@ function Illustration({ role, title }) {
       }
     }
   };
-
-  const bgImage =
-    role === "Admin"
-      ? adminBG
-      : role === "Patient"
-      ? patientBG
-      : role === "Hospital"
-      ? hospitalBG
-      : insuranceBG;
-
   const handleConfiguratorOpen = () => setOpenConfigurator(dispatch, !openConfigurator);
 
   const configsButton = (
@@ -137,24 +134,10 @@ function Illustration({ role, title }) {
   );
 
   return (
-    <IllustrationLayout
-      title={`${role} Sign In`}
-      description="Enter your email and password to sign in"
-      illustration={{
-        image: bgImage,
-        title: title,
-      }}
-    >
+    <IllustrationLayout title={`Face Verification`} description="Verify your face">
       <ArgonBox component="form" role="form">
         <ArgonBox mb={2}>
-          <ArgonInput
-            type="email"
-            placeholder="Email"
-            size="large"
-            onChange={(event) => {
-              setEmail(event.target.value);
-            }}
-          />
+          <ArgonInput type="email" placeholder="Email" size="large" value={email} disabled />
         </ArgonBox>
         <ArgonBox mb={2}>
           <ArgonInput

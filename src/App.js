@@ -11,10 +11,10 @@ import Icon from "@mui/material/Icon";
 // Argon Dashboard 2 MUI components
 import ArgonBox from "components/ArgonBox";
 import SignIn from "layouts/authentication/sign-in";
+import FaceVerification from "layouts/authentication/face-verification";
 
 // Argon Dashboard 2 MUI example components
 import Sidenav from "examples/Sidenav";
-
 
 // Argon Dashboard 2 MUI themes
 import theme from "assets/theme";
@@ -35,18 +35,9 @@ import "assets/css/nucleo-svg.css";
 import { insuranceRoutes } from "routes";
 import { patientRoutes } from "routes";
 
-
 export default function App() {
   const [controller, dispatch] = useArgonController();
-  const {
-    miniSidenav,
-    direction,
-    layout,
-    sidenavColor,
-    darkSidenav,
-    darkMode,
-    auth,
-  } = controller;
+  const { miniSidenav, direction, layout, sidenavColor, darkSidenav, darkMode, auth } = controller;
   const [onMouseEnter, setOnMouseEnter] = useState(false);
   const { pathname } = useLocation();
   const [tmpRoutes, setTmpRoutes] = useState([]);
@@ -59,10 +50,10 @@ export default function App() {
     } else if (auth.role === "hospital") {
       setTmpRoutes(hospitalRoutes);
       setBrandName("Hospital Dash");
-    }else if (auth.role === "insurance") {
+    } else if (auth.role === "insurance") {
       setTmpRoutes(insuranceRoutes);
       setBrandName("Insurance Dash");
-    }else if (auth.role === "patient") {
+    } else if (auth.role === "patient") {
       setTmpRoutes(patientRoutes);
       setBrandName("Patient Profile");
     }
@@ -110,8 +101,6 @@ export default function App() {
       return null;
     });
 
-
-
   return (
     <ThemeProvider theme={darkMode ? themeDark : theme}>
       <>
@@ -130,7 +119,6 @@ export default function App() {
         )}
 
         <Routes>
-
           {/* if hospital is logged in only hospital routes are enabled */}
           {auth.role === "hospital" && getRoutes(hospitalRoutes)}
 
@@ -167,22 +155,35 @@ export default function App() {
             element={<SignIn role="Hospital" title="Hosptail Sign In" />}
             key="hospital-sign-in"
           />
+          <Route
+            exact
+            path="authentication/face-verification"
+            element={<FaceVerification />}
+            key="face-verification"
+          />
 
           {/* if admin is logged in and any random route is accessed the page is redirected to admin dashboard */}
           {auth.role === "admin" && <Route path="*" element={<Navigate to="/admin/hospitals" />} />}
 
           {/* if hospital is logged in and any random route is accessed the page is redirected to hospital dashboard */}
-          {auth.role === "hospital" && <Route path="*" element={<Navigate to="/hospital/patients" />} />}
+          {auth.role === "hospital" && (
+            <Route path="*" element={<Navigate to="/hospital/patients" />} />
+          )}
 
           {/* if insurance is logged in and any random route is accessed the page is redirected to insurance dashboard */}
-          {auth.role === "insurance" && <Route path="*" element={<Navigate to="/insurance/patients" />} />}
+          {auth.role === "insurance" && (
+            <Route path="*" element={<Navigate to="/insurance/patients" />} />
+          )}
 
           {/* if patient is logged in and any random route is accessed the page is redirected to insurance patient */}
-          {auth.role === "patient" && <Route path="*" element={<Navigate to="/patient/profile" />} />}
+          {auth.role === "patient" && (
+            <Route path="*" element={<Navigate to="/patient/profile" />} />
+          )}
 
-           {/* if noone is logged in and any random route is accessed the page is redirected to admin signin */}
-           {!auth.role && <Route path="*" element={<Navigate to="/authentication/admin/sign-in" />} />}
-          
+          {/* if noone is logged in and any random route is accessed the page is redirected to admin signin */}
+          {!auth.role && (
+            <Route path="*" element={<Navigate to="/authentication/admin/sign-in" />} />
+          )}
         </Routes>
       </>
     </ThemeProvider>
