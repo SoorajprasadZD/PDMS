@@ -22,6 +22,7 @@ import { setOpenConfigurator } from "context";
 import { useArgonController, setAuth } from "context";
 import { Icon } from "@mui/material";
 import Configurator from "layouts/authentication/components/Configurator";
+import { CameraModal } from "./cameraModal";
 
 Illustration.propTypes = {
   role: PropTypes.string,
@@ -45,6 +46,7 @@ function Illustration() {
   const [role, setRole] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isCameraModalOpen, setIsCameraModalOpen] = useState(false);
   const [controller, dispatch] = useArgonController();
   const { openConfigurator } = controller;
   const navigate = useNavigate();
@@ -134,51 +136,54 @@ function Illustration() {
   );
 
   return (
-    <IllustrationLayout title={`Face Verification`} description="Verify your face">
-      <ArgonBox component="form" role="form">
-        <ArgonBox mb={2}>
-          <ArgonInput type="email" placeholder="Email" size="large" value={email} disabled />
+    <>
+      <CameraModal isOpen={isCameraModalOpen} onClose={() => setIsCameraModalOpen(false)} />
+      <IllustrationLayout title={`Face Verification`} description="Verify your face">
+        <ArgonBox component="form" role="form">
+          <ArgonBox mb={2}>
+            <ArgonInput type="email" placeholder="Email" size="large" value={email} disabled />
+          </ArgonBox>
+          <ArgonBox mb={2}>
+            <ArgonButton
+              color="info"
+              size="large"
+              fullWidth
+              onClick={() => setIsCameraModalOpen(true)}
+            >
+              Open Camera
+            </ArgonButton>
+          </ArgonBox>
+          <ArgonBox mt={4} mb={1}>
+            <ArgonButton
+              color="info"
+              size="large"
+              fullWidth
+              onClick={() => {
+                handleSubmit();
+              }}
+            >
+              Continue
+            </ArgonButton>
+          </ArgonBox>
+          <ArgonBox mt={3} textAlign="center"></ArgonBox>
         </ArgonBox>
-        <ArgonBox mb={2}>
-          <ArgonInput
-            type="password"
-            placeholder="Password"
-            size="large"
-            onChange={(event) => {
-              setPassword(event.target.value);
-            }}
-          />
-        </ArgonBox>
-        <ArgonBox mt={4} mb={1}>
-          <ArgonButton
-            color="info"
-            size="large"
-            fullWidth
-            onClick={() => {
-              handleSubmit();
-            }}
-          >
-            Sign In
-          </ArgonButton>
-        </ArgonBox>
-        <ArgonBox mt={3} textAlign="center"></ArgonBox>
-      </ArgonBox>
 
-      <ToastContainer
-        position="bottom-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
-      <Configurator />
-      {configsButton}
-    </IllustrationLayout>
+        <ToastContainer
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
+        <Configurator />
+        {configsButton}
+      </IllustrationLayout>
+    </>
   );
 }
 
