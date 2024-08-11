@@ -2,7 +2,7 @@ import { useRef } from "react";
 import PropTypes from "prop-types";
 import Webcam from "react-webcam";
 import * as faceapi from "face-api.js";
-import "./index.css";
+import "./cameraModal.css";
 
 export const CameraModal = ({ isOpen, onClose }) => {
   const webcamRef = useRef();

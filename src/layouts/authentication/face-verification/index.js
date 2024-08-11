@@ -22,7 +22,7 @@ import { setOpenConfigurator } from "context";
 import { useArgonController, setAuth } from "context";
 import { Icon } from "@mui/material";
 import Configurator from "layouts/authentication/components/Configurator";
-import { CameraModal } from "./cameraModal";
+import { CameraModal } from "./cameraModal/cameraModal";
 
 Illustration.propTypes = {
   role: PropTypes.string,
