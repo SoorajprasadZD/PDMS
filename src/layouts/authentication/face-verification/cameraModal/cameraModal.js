@@ -7,16 +7,26 @@ import "./cameraModal.css";
 
 export const CameraModal = ({ isOpen, onClose }) => {
   const webcamRef = useRef();
+  const previewRef = useRef()
   const [message, setFacenetMessage] = useState("Place the face in the oval.");
   const [outline, setOutline] = useState("#f00000");
-  let intervalId,screenShot
+  let intervalId, screenShot,faces;
 
   const takeScreenshot = () => {
-    console.log("Screenshot took");
-    screenShot = webcamRef.current.getScreenshot()
-    toast("Image added")
-    onClose()
+    screenShot = webcamRef.current.getScreenshot();
+    const previewImage = previewRef.current
+    previewImage.src=screenShot
+    handleScreenshot(previewImage)
+    onClose();
+    toast("Image added");
   };
+
+  const handleScreenshot = async (previewImage) => {
+    await faceapi.nets.ssdMobilenetv1.loadFromUri('/facenet/models/ssd_mobilenetv1')
+    await faceapi.nets.faceLandmark68Net.loadFromUri('/facenet/models/face_landmark_68')
+    await faceapi.nets.faceRecognitionNet.loadFromUri('/facenet/models/face_recognition')
+    faces = await faceapi.detectAllFaces(previewImage).withFaceLandmarks().withFaceDescriptors()
+  }
 
   useEffect(() => {
     return () => {
@@ -57,6 +67,7 @@ export const CameraModal = ({ isOpen, onClose }) => {
           &times;
         </span>
         <div className="camera-and-overlay-holder">
+          <img id="preview" ref={previewRef} src={screenShot} style={{display:"none"}}/>
           <Webcam
             id="webcam"
             className="camera-video"
