@@ -21,6 +21,8 @@ import { setOpenConfigurator } from "context";
 // Argon Dashboard 2 MUI contexts
 import { useArgonController, setAuth } from "context";
 import { CameraModal } from "./cameraModal/cameraModal";
+import CircularProgress from "@mui/material/CircularProgress";
+import LinearProgress from "@mui/material/LinearProgress";
 
 Illustration.propTypes = {
   role: PropTypes.string,
@@ -35,6 +37,7 @@ function Illustration() {
   const [isCameraModalOpen, setIsCameraModalOpen] = useState(false);
   const [screenShot, setScreenshot] = useState(null);
   const [faces, setFaces] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -47,8 +50,10 @@ function Illustration() {
   const handleCameraData = (screenShot2, faces2) => {
     setScreenshot(screenShot2);
     setFaces(faces2);
-    console.log(screenShot)
-    console.log(faces)
+    setIsLoading(false)
+    toast("Image added");
+    console.log(screenShot);
+    console.log(faces);
   };
 
   const handleSubmit = async () => {
@@ -109,21 +114,24 @@ function Illustration() {
         isOpen={isCameraModalOpen}
         onClose={() => setIsCameraModalOpen(false)}
         sendDataToParent={handleCameraData}
+        startProcessing={()=>{setIsLoading(true)}}
       />
       <IllustrationLayout title={`Face Verification`} description="Verify your face">
         <ArgonBox component="form" role="form">
           <ArgonBox mb={2}>
             <ArgonInput type="email" placeholder="Email" size="large" value={email} disabled />
           </ArgonBox>
-          <ArgonBox mb={2}>
+          <ArgonBox mb={2} style={{position:"relative"}}>
             <ArgonButton
               color="info"
               size="large"
               fullWidth
               onClick={() => setIsCameraModalOpen(true)}
+              disabled={isLoading}
             >
               Open Camera
             </ArgonButton>
+            {isLoading&&<CircularProgress size={42} style={{position:"absolute", right:-55}} />}
           </ArgonBox>
           <ArgonBox mt={4} mb={1}>
             <ArgonButton

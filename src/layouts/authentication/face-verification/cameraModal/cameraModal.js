@@ -1,11 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
 import PropTypes from "prop-types";
 import Webcam from "react-webcam";
 import * as faceapi from "face-api.js";
 import "./cameraModal.css";
 
-export const CameraModal = ({ isOpen, onClose, sendDataToParent }) => {
+export const CameraModal = ({ isOpen, onClose, sendDataToParent, startProcessing }) => {
   const webcamRef = useRef();
   const previewRef = useRef();
   const [message, setFacenetMessage] = useState("Place the face in the oval.");
@@ -18,33 +17,27 @@ export const CameraModal = ({ isOpen, onClose, sendDataToParent }) => {
     };
   }, [isOpen]);
 
-  useEffect(() => {
-    const loadModels = async () => {
-      await faceapi.nets.tinyFaceDetector.loadFromUri("/facenet/models/tiny_face_detector");
-      await faceapi.nets.ssdMobilenetv1.loadFromUri("/facenet/models/ssd_mobilenetv1");
-      await faceapi.nets.faceLandmark68Net.loadFromUri("/facenet/models/face_landmark_68");
-      await faceapi.nets.faceRecognitionNet.loadFromUri("/facenet/models/face_recognition");
-    };
-    loadModels();
-  }, []);
-
   const takeScreenshot = () => {
     screenShot = webcamRef.current.getScreenshot();
     const previewImage = previewRef.current;
     previewImage.src = screenShot;
     onClose();
-    toast("Image added");
     setTimeout(() => {
       handleScreenshot(previewImage);
     }, 100);
   };
 
   const handleScreenshot = async (previewImage) => {
+    startProcessing();
+    await faceapi.nets.ssdMobilenetv1.loadFromUri("/facenet/models/ssd_mobilenetv1");
+    await faceapi.nets.faceLandmark68Net.loadFromUri("/facenet/models/face_landmark_68");
+    await faceapi.nets.faceRecognitionNet.loadFromUri("/facenet/models/face_recognition");
     faces = await faceapi.detectAllFaces(previewImage).withFaceLandmarks().withFaceDescriptors();
     sendDataToParent(screenShot, faces);
   };
 
   const handleStreamVideo = async (e) => {
+    await faceapi.nets.tinyFaceDetector.loadFromUri("/facenet/models/tiny_face_detector");
     let counter = 0;
     intervalId = setInterval(async () => {
       if (counter <= 40) {
@@ -102,4 +95,5 @@ CameraModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   sendDataToParent: PropTypes.func.isRequired,
+  startProcessing: PropTypes.func.isRequired,
 };
