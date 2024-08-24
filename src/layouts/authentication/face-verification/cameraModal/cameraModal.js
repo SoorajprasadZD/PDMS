@@ -5,28 +5,12 @@ import Webcam from "react-webcam";
 import * as faceapi from "face-api.js";
 import "./cameraModal.css";
 
-export const CameraModal = ({ isOpen, onClose }) => {
+export const CameraModal = ({ isOpen, onClose, sendDataToParent }) => {
   const webcamRef = useRef();
-  const previewRef = useRef()
+  const previewRef = useRef();
   const [message, setFacenetMessage] = useState("Place the face in the oval.");
   const [outline, setOutline] = useState("#f00000");
-  let intervalId, screenShot,faces;
-
-  const takeScreenshot = () => {
-    screenShot = webcamRef.current.getScreenshot();
-    const previewImage = previewRef.current
-    previewImage.src=screenShot
-    handleScreenshot(previewImage)
-    onClose();
-    toast("Image added");
-  };
-
-  const handleScreenshot = async (previewImage) => {
-    await faceapi.nets.ssdMobilenetv1.loadFromUri('/facenet/models/ssd_mobilenetv1')
-    await faceapi.nets.faceLandmark68Net.loadFromUri('/facenet/models/face_landmark_68')
-    await faceapi.nets.faceRecognitionNet.loadFromUri('/facenet/models/face_recognition')
-    faces = await faceapi.detectAllFaces(previewImage).withFaceLandmarks().withFaceDescriptors()
-  }
+  let intervalId, screenShot, faces;
 
   useEffect(() => {
     return () => {
@@ -34,8 +18,33 @@ export const CameraModal = ({ isOpen, onClose }) => {
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    const loadModels = async () => {
+      await faceapi.nets.tinyFaceDetector.loadFromUri("/facenet/models/tiny_face_detector");
+      await faceapi.nets.ssdMobilenetv1.loadFromUri("/facenet/models/ssd_mobilenetv1");
+      await faceapi.nets.faceLandmark68Net.loadFromUri("/facenet/models/face_landmark_68");
+      await faceapi.nets.faceRecognitionNet.loadFromUri("/facenet/models/face_recognition");
+    };
+    loadModels();
+  }, []);
+
+  const takeScreenshot = () => {
+    screenShot = webcamRef.current.getScreenshot();
+    const previewImage = previewRef.current;
+    previewImage.src = screenShot;
+    onClose();
+    toast("Image added");
+    setTimeout(() => {
+      handleScreenshot(previewImage);
+    }, 100);
+  };
+
+  const handleScreenshot = async (previewImage) => {
+    faces = await faceapi.detectAllFaces(previewImage).withFaceLandmarks().withFaceDescriptors();
+    sendDataToParent(screenShot, faces);
+  };
+
   const handleStreamVideo = async (e) => {
-    await faceapi.nets.tinyFaceDetector.loadFromUri("/facenet/models/tiny_face_detector");
     let counter = 0;
     intervalId = setInterval(async () => {
       if (counter <= 40) {
@@ -67,7 +76,7 @@ export const CameraModal = ({ isOpen, onClose }) => {
           &times;
         </span>
         <div className="camera-and-overlay-holder">
-          <img id="preview" ref={previewRef} src={screenShot} style={{display:"none"}}/>
+          <img id="preview" ref={previewRef} src={screenShot} style={{ display: "none" }} />
           <Webcam
             id="webcam"
             className="camera-video"
@@ -92,4 +101,5 @@ export const CameraModal = ({ isOpen, onClose }) => {
 CameraModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  sendDataToParent: PropTypes.func.isRequired,
 };

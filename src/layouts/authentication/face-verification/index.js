@@ -20,8 +20,6 @@ import { setOpenConfigurator } from "context";
 
 // Argon Dashboard 2 MUI contexts
 import { useArgonController, setAuth } from "context";
-import { Icon } from "@mui/material";
-import Configurator from "layouts/authentication/components/Configurator";
 import { CameraModal } from "./cameraModal/cameraModal";
 
 Illustration.propTypes = {
@@ -29,26 +27,14 @@ Illustration.propTypes = {
   title: PropTypes.string,
 };
 
-// document.addEventListener("DOMContentLoaded", function () {
-//   setTimeout(function () {
-//     const urlParams = new URLSearchParams(window.location.search);
-//     const id = urlParams.get("id");
-//     const role = urlParams.get("role");
-//     if (id && role) {
-//       console.log(id)
-//       console.log(role)
-//     }
-//   }, 300);
-// });
-
 function Illustration() {
   const [id, setId] = useState("");
   const [role, setRole] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isCameraModalOpen, setIsCameraModalOpen] = useState(false);
-  const [controller, dispatch] = useArgonController();
-  const { openConfigurator } = controller;
+  const [screenShot, setScreenshot] = useState(null);
+  const [faces, setFaces] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -57,6 +43,13 @@ function Illustration() {
     setRole(urlParams.get("role"));
     setEmail(urlParams.get("email"));
   }, []);
+
+  const handleCameraData = (screenShot2, faces2) => {
+    setScreenshot(screenShot2);
+    setFaces(faces2);
+    console.log(screenShot)
+    console.log(faces)
+  };
 
   const handleSubmit = async () => {
     if (!email || !id || !role) {
@@ -109,35 +102,14 @@ function Illustration() {
       }
     }
   };
-  const handleConfiguratorOpen = () => setOpenConfigurator(dispatch, !openConfigurator);
-
-  const configsButton = (
-    <ArgonBox
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      width="3.5rem"
-      height="3.5rem"
-      bgColor="white"
-      shadow="sm"
-      borderRadius="50%"
-      position="fixed"
-      right="2rem"
-      bottom="2rem"
-      zIndex={99}
-      color="dark"
-      sx={{ cursor: "pointer" }}
-      onClick={handleConfiguratorOpen}
-    >
-      <Icon fontSize="default" color="inherit">
-        settings
-      </Icon>
-    </ArgonBox>
-  );
 
   return (
     <>
-      <CameraModal isOpen={isCameraModalOpen} onClose={() => setIsCameraModalOpen(false)} />
+      <CameraModal
+        isOpen={isCameraModalOpen}
+        onClose={() => setIsCameraModalOpen(false)}
+        sendDataToParent={handleCameraData}
+      />
       <IllustrationLayout title={`Face Verification`} description="Verify your face">
         <ArgonBox component="form" role="form">
           <ArgonBox mb={2}>
@@ -180,8 +152,6 @@ function Illustration() {
           pauseOnHover
           theme="dark"
         />
-        <Configurator />
-        {configsButton}
       </IllustrationLayout>
     </>
   );
