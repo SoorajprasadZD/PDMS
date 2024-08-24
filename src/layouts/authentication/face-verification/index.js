@@ -34,7 +34,7 @@ function Illustration() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isCameraModalOpen, setIsCameraModalOpen] = useState(false);
-  const [screenShot, setScreenshot] = useState(null);
+  const [screenshot, setScreenshot] = useState(null);
   const [faces, setFaces] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -46,8 +46,8 @@ function Illustration() {
     setEmail(urlParams.get("email"));
   }, []);
 
-  const handleCameraData = (screenShot, faces) => {
-    setScreenshot(screenShot);
+  const handleCameraData = (screenshot, faces) => {
+    setScreenshot(screenshot);
     setFaces(faces);
     setIsLoading(false)
     toast("Image added");
