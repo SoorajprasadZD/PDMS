@@ -22,7 +22,6 @@ import { setOpenConfigurator } from "context";
 import { useArgonController, setAuth } from "context";
 import { CameraModal } from "./cameraModal/cameraModal";
 import CircularProgress from "@mui/material/CircularProgress";
-import LinearProgress from "@mui/material/LinearProgress";
 
 Illustration.propTypes = {
   role: PropTypes.string,
@@ -47,13 +46,11 @@ function Illustration() {
     setEmail(urlParams.get("email"));
   }, []);
 
-  const handleCameraData = (screenShot2, faces2) => {
-    setScreenshot(screenShot2);
-    setFaces(faces2);
+  const handleCameraData = (screenShot, faces) => {
+    setScreenshot(screenShot);
+    setFaces(faces);
     setIsLoading(false)
     toast("Image added");
-    console.log(screenShot);
-    console.log(faces);
   };
 
   const handleSubmit = async () => {
