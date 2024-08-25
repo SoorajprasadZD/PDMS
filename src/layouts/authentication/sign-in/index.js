@@ -56,10 +56,11 @@ function Illustration({ role, title }) {
       switch (role) {
         case "Admin":
           try {
-            const response = await adminLoginService({ email, password });
+            const response = await adminLoginService({ email, password, role:'admin' });
             const auth = JSON.parse(localStorage.getItem("auth"));
             setAuth(dispatch, auth);
             navigate("/admin/hospitals");
+            toast("login successful")
           } catch (error) {
             toast(error.message);
           }
