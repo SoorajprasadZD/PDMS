@@ -13,6 +13,7 @@ import { adminLoginService } from "services/loginService";
 import { hospitalLoginService } from "services/loginService";
 import { patientLoginService } from "services/loginService";
 import { insuranceLoginService } from "services/loginService";
+import { registerFaceService } from "services/common/registerFace";
 
 import { useNavigate } from "react-router-dom";
 
@@ -49,7 +50,7 @@ function Illustration() {
   const handleCameraData = (screenshot, faces) => {
     setScreenshot(screenshot);
     setFaces(faces);
-    setIsLoading(false)
+    setIsLoading(false);
     toast("Image added");
   };
 
@@ -57,50 +58,12 @@ function Illustration() {
     if (!email || !id || !role) {
       toast("Invalid URL");
     } else {
-      switch (role) {
-        case "Admin":
-          try {
-            const response = await adminLoginService({ email, password });
-            const auth = JSON.parse(localStorage.getItem("auth"));
-            setAuth(dispatch, auth);
-            navigate("/admin/hospitals");
-          } catch (error) {
-            toast(error.message);
-          }
-          break;
-        case "Patient":
-          try {
-            const response = await patientLoginService({ email, password });
-            const auth = JSON.parse(localStorage.getItem("auth"));
-            await setAuth(dispatch, auth);
-            navigate(`/patient/profile/${auth.id}`);
-          } catch (error) {
-            toast(error.message);
-          }
-          break;
-        case "Hospital":
-          try {
-            const response = await hospitalLoginService({ email, password });
-            const auth = JSON.parse(localStorage.getItem("auth"));
-            await setAuth(dispatch, auth);
-            navigate("/hospital/patients");
-          } catch (error) {
-            toast(error.message);
-          }
-          break;
-        case "Insurance":
-          try {
-            const response = await insuranceLoginService({ email, password });
-            const auth = JSON.parse(localStorage.getItem("auth"));
-            await setAuth(dispatch, auth);
-            navigate("/insurance/patients");
-          } catch (error) {
-            toast(error.message);
-          }
-          break;
-        default:
-          toast("user login faild");
-          break;
+      try {
+        const response = await registerFaceService({id, email, role, descriptor: Object.values(faces[0].descriptor),screenshot });
+        console.log(response)
+        navigate("/");
+      } catch (error) {
+        toast(error.message);
       }
     }
   };
@@ -111,14 +74,16 @@ function Illustration() {
         isOpen={isCameraModalOpen}
         onClose={() => setIsCameraModalOpen(false)}
         sendDataToParent={handleCameraData}
-        startProcessing={()=>{setIsLoading(true)}}
+        startProcessing={() => {
+          setIsLoading(true);
+        }}
       />
       <IllustrationLayout title={`Face Verification`} description="Verify your face">
         <ArgonBox component="form" role="form">
           <ArgonBox mb={2}>
             <ArgonInput type="email" placeholder="Email" size="large" value={email} disabled />
           </ArgonBox>
-          <ArgonBox mb={2} style={{position:"relative"}}>
+          <ArgonBox mb={2} style={{ position: "relative" }}>
             <ArgonButton
               color="info"
               size="large"
@@ -128,7 +93,9 @@ function Illustration() {
             >
               Open Camera
             </ArgonButton>
-            {isLoading&&<CircularProgress size={42} style={{position:"absolute", right:-55}} />}
+            {isLoading && (
+              <CircularProgress size={42} style={{ position: "absolute", right: -55 }} />
+            )}
           </ArgonBox>
           <ArgonBox mt={4} mb={1}>
             <ArgonButton
