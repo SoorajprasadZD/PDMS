@@ -11,7 +11,7 @@ import Icon from "@mui/material/Icon";
 // Argon Dashboard 2 MUI components
 import ArgonBox from "components/ArgonBox";
 import SignIn from "layouts/authentication/sign-in";
-import FaceVerification from "layouts/authentication/face-verification";
+import FaceRegistration from "layouts/authentication/face-registration";
 
 // Argon Dashboard 2 MUI example components
 import Sidenav from "examples/Sidenav";
@@ -157,8 +157,8 @@ export default function App() {
           />
           <Route
             exact
-            path="authentication/face-verification"
-            element={<FaceVerification />}
+            path="authentication/face-registration"
+            element={<FaceRegistration />}
             key="face-verification"
           />
 

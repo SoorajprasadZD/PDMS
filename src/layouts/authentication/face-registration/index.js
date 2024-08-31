@@ -8,19 +8,10 @@ import ArgonButton from "components/ArgonButton";
 import { ToastContainer, toast } from "react-toastify";
 
 // Authentication layout components
-import IllustrationLayout from "layouts/authentication/components/FaceVerificationIllustrationLayout";
-import { adminLoginService } from "services/loginService";
-import { hospitalLoginService } from "services/loginService";
-import { patientLoginService } from "services/loginService";
-import { insuranceLoginService } from "services/loginService";
+import IllustrationLayout from "layouts/authentication/components/FaceRegistrationIllustrationLayout";
 import { registerFaceService } from "services/common/registerFace";
 
 import { useNavigate } from "react-router-dom";
-
-import { setOpenConfigurator } from "context";
-
-// Argon Dashboard 2 MUI contexts
-import { useArgonController, setAuth } from "context";
 import { CameraModal } from "./cameraModal/cameraModal";
 import CircularProgress from "@mui/material/CircularProgress";
 
@@ -33,7 +24,6 @@ function Illustration() {
   const [id, setId] = useState("");
   const [role, setRole] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [isCameraModalOpen, setIsCameraModalOpen] = useState(false);
   const [screenshot, setScreenshot] = useState(null);
   const [faces, setFaces] = useState([]);
@@ -51,7 +41,7 @@ function Illustration() {
     setScreenshot(screenshot);
     setFaces(faces);
     setIsLoading(false);
-    toast("Image added");
+    toast("Face added");
   };
 
   const handleSubmit = async () => {
@@ -86,7 +76,7 @@ function Illustration() {
           setIsLoading(true);
         }}
       />
-      <IllustrationLayout title={`Face Verification`} description="Verify your face">
+      <IllustrationLayout title={`Face Registration`} description="Register your face">
         <ArgonBox component="form" role="form">
           <ArgonBox mb={2}>
             <ArgonInput type="email" placeholder="Email" size="large" value={email} disabled />
@@ -99,7 +89,7 @@ function Illustration() {
               disabled={isLoading}
               onClick={() => setIsCameraModalOpen(true)}
             >
-              Open Camera
+              Add Face
             </ArgonButton>
             {isLoading && (
               <CircularProgress size={42} style={{ position: "absolute", right: -55 }} />
