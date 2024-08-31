@@ -61,6 +61,7 @@ function Illustration() {
       try {
         const response = await registerFaceService({id, email, role, descriptor: Object.values(faces[0].descriptor),screenshot });
         console.log(response)
+        toast(response.message)
         navigate("/");
       } catch (error) {
         toast(error.message);
@@ -88,8 +89,8 @@ function Illustration() {
               color="info"
               size="large"
               fullWidth
-              onClick={() => setIsCameraModalOpen(true)}
               disabled={isLoading}
+              onClick={() => setIsCameraModalOpen(true)}
             >
               Open Camera
             </ArgonButton>
@@ -102,6 +103,7 @@ function Illustration() {
               color="info"
               size="large"
               fullWidth
+              disabled={faces[0]==null}
               onClick={() => {
                 handleSubmit();
               }}
