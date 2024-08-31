@@ -67,7 +67,9 @@ function Illustration() {
           screenshot,
         });
         toast(response.message);
-        navigate("/");
+        setTimeout(() => {
+          navigate("/");
+        }, 3000);
       } catch (error) {
         toast(error.message);
       }
