@@ -159,7 +159,7 @@ export default function App() {
             exact
             path="authentication/face-registration"
             element={<FaceRegistration />}
-            key="face-verification"
+            key="face-registration"
           />
 
           {/* if admin is logged in and any random route is accessed the page is redirected to admin dashboard */}

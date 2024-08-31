@@ -8,19 +8,19 @@ import ArgonButton from "components/ArgonButton";
 import { ToastContainer, toast } from "react-toastify";
 
 // Authentication layout components
-import IllustrationLayout from "layouts/authentication/components/FaceRegistrationIllustrationLayout";
+import FaceIllustrationLayout from "layouts/authentication/components/FaceIllustrationLayout";
 import { registerFaceService } from "services/common/registerFace";
 
 import { useNavigate } from "react-router-dom";
 import { CameraModal } from "./cameraModal/cameraModal";
 import CircularProgress from "@mui/material/CircularProgress";
 
-Illustration.propTypes = {
+FaceRegistration.propTypes = {
   role: PropTypes.string,
   title: PropTypes.string,
 };
 
-function Illustration() {
+function FaceRegistration() {
   const [id, setId] = useState("");
   const [role, setRole] = useState("");
   const [email, setEmail] = useState("");
@@ -76,7 +76,7 @@ function Illustration() {
           setIsLoading(true);
         }}
       />
-      <IllustrationLayout title={`Face Registration`} description="Register your face">
+      <FaceIllustrationLayout title={`Face Registration`} description="Register your face">
         <ArgonBox component="form" role="form">
           <ArgonBox mb={2}>
             <ArgonInput type="email" placeholder="Email" size="large" value={email} disabled />
@@ -123,9 +123,9 @@ function Illustration() {
           pauseOnHover
           theme="dark"
         />
-      </IllustrationLayout>
+      </FaceIllustrationLayout>
     </>
   );
 }
 
-export default Illustration;
+export default FaceRegistration;

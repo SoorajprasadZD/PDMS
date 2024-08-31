@@ -11,7 +11,7 @@ import ArgonTypography from "components/ArgonTypography";
 // Argon Dashboard 2 MUI example components
 import PageLayout from "examples/LayoutContainers/PageLayout";
 
-function IllustrationLayout({ color, header, title, description, illustration, children }) {
+function FaceIllustrationLayout({ color, header, title, description, illustration, children }) {
   return (
     <PageLayout background="white">
       <Grid container>
@@ -42,7 +42,7 @@ function IllustrationLayout({ color, header, title, description, illustration, c
 }
 
 // Setting default values for the props of IllustrationLayout
-IllustrationLayout.defaultProps = {
+FaceIllustrationLayout.defaultProps = {
   color: "info",
   header: "",
   title: "",
@@ -52,7 +52,7 @@ IllustrationLayout.defaultProps = {
 };
 
 // Typechecking props for the IllustrationLayout
-IllustrationLayout.propTypes = {
+FaceIllustrationLayout.propTypes = {
   color: PropTypes.oneOf(["primary", "secondary", "info", "success", "warning", "error", "dark"]),
   header: PropTypes.node,
   title: PropTypes.string,
@@ -66,4 +66,4 @@ IllustrationLayout.propTypes = {
   }),
 };
 
-export default IllustrationLayout;
+export default FaceIllustrationLayout;
