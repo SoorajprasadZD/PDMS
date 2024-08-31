@@ -59,9 +59,14 @@ function Illustration() {
       toast("Invalid URL");
     } else {
       try {
-        const response = await registerFaceService({id, email, role, descriptor: Object.values(faces[0].descriptor),screenshot });
-        console.log(response)
-        toast(response.message)
+        const response = await registerFaceService({
+          id,
+          email,
+          role,
+          descriptor: Object.values(faces[0].descriptor),
+          screenshot,
+        });
+        toast(response.message);
         navigate("/");
       } catch (error) {
         toast(error.message);
@@ -103,7 +108,7 @@ function Illustration() {
               color="info"
               size="large"
               fullWidth
-              disabled={faces[0]==null}
+              disabled={faces[0] == null}
               onClick={() => {
                 handleSubmit();
               }}

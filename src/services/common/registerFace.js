@@ -5,6 +5,6 @@ export const registerFaceService = async (data) => {
     const response = await axios.post("http://localhost:5000/common/verify-link", data);
     return response.data;
   } catch (error) {
-    throw error.response;
+    throw error.response.data
   }
 };
