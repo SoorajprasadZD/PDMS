@@ -49,9 +49,9 @@ function Overview() {
   }, [open]);
 
   useEffect(() => {
-    // fetchPatientReports(id, auth.id).then((response) => {
-    //   setPatientReports(response.data.reports.reverse());
-    // });
+    fetchPatientReports(id, auth.id).then((response) => {
+      setPatientReports(response.reverse());
+    });
   }, [openReport]);
 
   return (
