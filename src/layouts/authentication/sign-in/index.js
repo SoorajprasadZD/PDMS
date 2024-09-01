@@ -65,7 +65,7 @@ function Illustration({ role, title }) {
           break;
         case "Patient":
           try {
-            const response = await patientLoginService({ email, password });
+            const response = await patientLoginService({ email, password, role: "patient" });
             const auth = JSON.parse(localStorage.getItem("auth"));
             await setAuth(dispatch, auth);
             navigate(`/patient/profile/${auth.id}`);
@@ -87,7 +87,7 @@ function Illustration({ role, title }) {
           break;
         case "Insurance":
           try {
-            const response = await insuranceLoginService({ email, password });
+            const response = await insuranceLoginService({ email, password, role: "insurance" });
             const auth = JSON.parse(localStorage.getItem("auth"));
             await setAuth(dispatch, auth);
             navigate("/insurance/patients");
