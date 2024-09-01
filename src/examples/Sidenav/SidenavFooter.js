@@ -19,10 +19,10 @@ function SidenavFooter() {
       setAuth(dispatch, {})
       navigate("authentication/admin/sign-in");
     }
-    if (auth.role==='hospital'){
+    if (auth.role==='doctor'){
       localStorage.setItem("auth", JSON.stringify({ role: "", id: "" }));
       setAuth(dispatch, {})
-      navigate('authentication/hospital/sign-in')
+      navigate('authentication/doctor/sign-in')
     }
     if (auth.role==='insurance'){
       localStorage.setItem("auth", JSON.stringify({ role: "", id: "" }));
