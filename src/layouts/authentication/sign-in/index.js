@@ -21,7 +21,7 @@ import { setOpenConfigurator } from "context";
 // Argon Dashboard 2 MUI contexts
 import { useArgonController, setAuth } from "context";
 import { Icon } from "@mui/material";
-import Configurator from "layouts/authentication/components/Configurator"
+import Configurator from "layouts/authentication/components/Configurator";
 
 Illustration.propTypes = {
   role: PropTypes.string,
@@ -43,9 +43,7 @@ function Illustration({ role, title }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [controller, dispatch] = useArgonController();
-  const {
-    openConfigurator,
-  } = controller;
+  const { openConfigurator } = controller;
 
   const navigate = useNavigate();
 
@@ -56,11 +54,11 @@ function Illustration({ role, title }) {
       switch (role) {
         case "Admin":
           try {
-            const response = await adminLoginService({ email, password, role:'admin' });
+            const response = await adminLoginService({ email, password, role: "admin" });
             const auth = JSON.parse(localStorage.getItem("auth"));
             setAuth(dispatch, auth);
             navigate("/admin/hospitals");
-            toast("login successful")
+            toast("login successful");
           } catch (error) {
             toast(error.message);
           }
@@ -77,8 +75,10 @@ function Illustration({ role, title }) {
           break;
         case "Hospital":
           try {
-            const response = await hospitalLoginService({ email, password });
+            const response = await hospitalLoginService({ email, password, role: "doctor" });
             const auth = JSON.parse(localStorage.getItem("auth"));
+            console.log(response);
+            console.log(auth);
             await setAuth(dispatch, auth);
             navigate("/hospital/patients");
           } catch (error) {

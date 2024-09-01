@@ -12,6 +12,7 @@ import Icon from "@mui/material/Icon";
 import ArgonBox from "components/ArgonBox";
 import SignIn from "layouts/authentication/sign-in";
 import FaceRegistration from "layouts/authentication/face-registration";
+import FaceVerification from "layouts/authentication/face-verification";
 
 // Argon Dashboard 2 MUI example components
 import Sidenav from "examples/Sidenav";
@@ -120,7 +121,7 @@ export default function App() {
 
         <Routes>
           {/* if hospital is logged in only hospital routes are enabled */}
-          {auth.role === "hospital" && getRoutes(hospitalRoutes)}
+          {auth.role === "doctor" && getRoutes(hospitalRoutes)}
 
           {/* if admin is logged in only admin routes are enabled */}
           {auth.role === "admin" && getRoutes(adminRoutes)}
@@ -161,12 +162,18 @@ export default function App() {
             element={<FaceRegistration />}
             key="face-registration"
           />
+          <Route
+            exact
+            path="authentication/face-verification"
+            element={<FaceVerification />}
+            key="face-verification"
+          />
 
           {/* if admin is logged in and any random route is accessed the page is redirected to admin dashboard */}
           {auth.role === "admin" && <Route path="*" element={<Navigate to="/admin/hospitals" />} />}
 
           {/* if hospital is logged in and any random route is accessed the page is redirected to hospital dashboard */}
-          {auth.role === "hospital" && (
+          {auth.role === "doctor" && (
             <Route path="*" element={<Navigate to="/hospital/patients" />} />
           )}
 

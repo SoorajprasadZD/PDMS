@@ -36,9 +36,9 @@ export const hospitalRoutes = [
     component: <PatientGrid />,
   },
   {
-    // type: "route",
-    // name: "Patient Profile Hospital",
-    // key: "patient-profile",
+    type: "route",
+    name: "Patient Profile Hospital",
+    key: "patient-profile",
     route: "/hospital/patient-profile/:id",
     icon: <ArgonBox component="i" color="dark" fontSize="14px" className="ni ni-single-02" />,
     component: <PatientProfile />,

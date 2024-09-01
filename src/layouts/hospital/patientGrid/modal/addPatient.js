@@ -52,11 +52,11 @@ export default function AddPatientModal(props) {
   const [controller] = useArgonController();
   const { auth } = controller;
 
-  React.useEffect(() => {
-    fetchUnusedAddresses().then((addresses) => {
-      setUnUsedAddress(addresses.data.addresses);
-    });
-  }, [props.open]);
+  // React.useEffect(() => {
+  //   fetchUnusedAddresses().then((addresses) => {
+  //     setUnUsedAddress(addresses.data.addresses);
+  //   });
+  // }, [props.open]);
 
   const handleClose = () => props.setOpen(false);
 
