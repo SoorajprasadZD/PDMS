@@ -24,8 +24,8 @@ function PatientGrid() {
   
 
   useEffect(() => {
-    fetchAuthorisedPatients(auth.id).then((response) => {
-      const { columns, rows } = patientData(response.data.patients);
+    fetchAuthorisedPatients().then((response) => {
+      const { columns, rows } = patientData(response);
       setColumns(columns);
       setRows(rows);
     });
