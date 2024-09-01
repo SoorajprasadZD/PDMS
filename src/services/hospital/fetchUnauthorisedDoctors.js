@@ -1,10 +1,10 @@
 import axios from "axios";
 
-export const fetchUnAuthorisedInsurances = async (patientId) => {
+export const fetchUnAuthorisedDoctors = async (patientId ) => {
   try {
     const { id, role } = JSON.parse(localStorage.getItem("auth"));
     const response = await axios.get(
-      `http://localhost:5000/patients/${patientId}/unauthorized-insurances`,
+      `http://localhost:5000/patients/${patientId}/unauthorized-doctors`,
       {
         headers: {
           id,

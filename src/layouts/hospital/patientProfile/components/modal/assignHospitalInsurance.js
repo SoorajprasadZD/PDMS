@@ -12,7 +12,7 @@ import { Stack } from "@mui/material";
 import { useState } from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { useArgonController } from "context";
-import { fetchUnAuthorisedHospitals } from "services/hospital/fetchUnauthorisedHospitals";
+import { fetchUnAuthorisedDoctors  } from "services/hospital/fetchUnauthorisedDoctors";
 import { fetchUnAuthorisedInsurances } from "services/hospital/fetchUnauthorisedInsurance";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
@@ -44,12 +44,12 @@ export default function AssignHospitalInsuranceModal({ open, setOpen, type }) {
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
-    fetchUnAuthorisedInsurances(id, auth.id).then((response) => {
-      setInsuranceData(response.data.unAuthorizedInsuranceCompanies);
+    fetchUnAuthorisedInsurances(id).then((response) => {
+      setInsuranceData(response);
     });
 
-    fetchUnAuthorisedHospitals(id, auth.id).then((response) => {
-      setHospitalData(response.data.unauthorizedHospitals);
+    fetchUnAuthorisedDoctors(id).then((response) => {
+      setHospitalData(response);
     });
   }, []);
 
