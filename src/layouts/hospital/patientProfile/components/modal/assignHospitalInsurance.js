@@ -17,8 +17,8 @@ import { fetchUnAuthorisedInsurances } from "services/hospital/fetchUnauthorised
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import { authorizeHospital } from "services/hospital/authoriseHospital";
-import { authorizeInsuranceCompany } from "services/hospital/authoriseInsurance";
+import { authorizeDoctor } from "services/hospital/authorizeDoctor";
+import { authorizeInsurance } from "services/hospital/authorizeInsurance";
 
 const style = {
   position: "absolute",
@@ -60,12 +60,11 @@ export default function AssignHospitalInsuranceModal({ open, setOpen, type }) {
   const handleSubmit = async () => {
     if (type === "hospital") {
       const data = {
-        hospitalId: auth.id,
         patientId: id,
-        hospitalToBeAuthorizedId: toBeAuthorizedId,
+        doctorIdToBeAuthorized: toBeAuthorizedId,
       };
 
-      const response = await authorizeHospital(data);
+      const response = await authorizeDoctor(data);
       if (response.status === "success") {
         toast(response.message);
         setToBeAuthorizedId("");
@@ -76,11 +75,10 @@ export default function AssignHospitalInsuranceModal({ open, setOpen, type }) {
     }
     if (type === "insurance") {
       const data = {
-        hospitalId: auth.id,
         patientId: id,
-        insuranceCompanyToBeAuthorizedId: toBeAuthorizedId,
+        insuranceCompanyIdToBeAuthorized: toBeAuthorizedId,
       };
-      const response = await authorizeInsuranceCompany(data);
+      const response = await authorizeInsurance(data);
       if (response.status === "success") {
         toast(response.message);
         setToBeAuthorizedId("");
@@ -125,6 +123,7 @@ export default function AssignHospitalInsuranceModal({ open, setOpen, type }) {
                   IconComponent={ArrowDropDownIcon}
                   value={toBeAuthorizedId}
                   onChange={(event) => {
+                    console.log(event.target.value)
                     setToBeAuthorizedId(event.target.value);
                   }}
                 >
@@ -135,7 +134,7 @@ export default function AssignHospitalInsuranceModal({ open, setOpen, type }) {
                   {type === "hospital"
                     ? hospitalData.map((item, key) => {
                         return (
-                          <MenuItem key={key} value={item.hospitalId}>
+                          <MenuItem key={key} value={item.doctorId}>
                             {item.name}
                           </MenuItem>
                         );
