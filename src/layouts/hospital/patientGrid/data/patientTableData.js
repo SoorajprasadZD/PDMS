@@ -52,7 +52,6 @@ const patientData = (patientsArray) => {
     { name: "patient", align: "left" },
     { name: "phone", align: "center" },
     { name: "state", align: "center" },
-    { name: "wallet", align: "center" },
     { name: "profile", align: "center" },
   ];
 
@@ -69,11 +68,6 @@ const patientData = (patientsArray) => {
       phone: (
         <ArgonTypography variant="caption" color="secondary" fontWeight="medium">
          {patient?.phone}
-        </ArgonTypography>
-      ),
-      wallet: (
-        <ArgonTypography variant="caption" color="text" fontWeight="medium">
-          {patient?.wallet}
         </ArgonTypography>
       ),
       profile: (<ViewProfile id={patient?.patientId} />),

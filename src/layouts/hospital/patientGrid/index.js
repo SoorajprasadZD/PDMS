@@ -27,11 +27,12 @@ function PatientGrid() {
   const { auth } = controller;
 
   useEffect(() => {
-    // fetchAuthorisedPatients(auth.id).then((response) => {
-    //   const { columns, rows } = patientData(response.data.patients);
-    //   setColumns(columns);
-    //   setRows(rows);
-    // });
+    fetchAuthorisedPatients(auth.id).then((response) => {
+      console.log(response)
+      const { columns, rows } = patientData(response);
+      setColumns(columns);
+      setRows(rows);
+    });
   }, [open]);
 
   return (
