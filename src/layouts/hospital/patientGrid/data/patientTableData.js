@@ -35,7 +35,7 @@ function ViewProfile(params) {
 
   const handleClick = (event) => {
     event.preventDefault();
-    navigate(`/hospital/patient-profile/${params.id}`);
+    navigate(`/doctor/patient-profile/${params.id}`);
   };
 
   return (
