@@ -17,7 +17,7 @@ import { useParams } from "react-router-dom";
 import { fetchPatientProfile } from "services/common/fetchPatient";
 import { useState, useEffect } from "react";
 import { useArgonController } from "context";
-import { fetchAuthorisedHospitals } from "services/hospital/fetchAuthorisedHospitals";
+import { fetchAuthorisedDoctors } from "services/hospital/fetchAuthorisedDoctors";
 import { fetchAuthorisedInsurances } from "services/hospital/fetchAuthorisedInsurances";
 import { fetchPatientReports } from "services/hospital/fetchPatientList";
 
@@ -40,18 +40,18 @@ function Overview() {
     fetchPatientProfile(id).then((response) => {
       setPateientProfile(response.data);
     });
-    fetchAuthorisedHospitals(id, auth.id).then((response) => {
-      setHospitalListData(response.data.authorizedHospitals);
+    fetchAuthorisedDoctors(id, auth.id).then((response) => {
+      setHospitalListData(response);
     });
     fetchAuthorisedInsurances(id, auth.id).then((response) => {
-      setInsuranceListData(response.data.authorizedInsuranceCompanies);
+      setInsuranceListData(response);
     });
   }, [open]);
 
   useEffect(() => {
-    fetchPatientReports(id, auth.id).then((response) => {
-      setPatientReports(response.data.reports.reverse());
-    });
+    // fetchPatientReports(id, auth.id).then((response) => {
+    //   setPatientReports(response.data.reports.reverse());
+    // });
   }, [openReport]);
 
   return (
