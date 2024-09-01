@@ -52,18 +52,15 @@ export default function AddPatientReportModal(props) {
 
   const handleSubmit = async () => {
     const data = {
-      hospitalId: auth.id,
-      patientId: id,
-      patientReport: {
-        dateOfVisit,
-        causeOfVisit,
-        condition,
-        description,
-        doctor,
-        medication,
-      },
+      dateOfVisit,
+      causeOfVisit,
+      condition,
+      description,
+      doctor,
+      medication,
     };
-    const response = await updatePatient(data);
+
+    const response = await updatePatient(data, id);
     if (response.status === "success") {
       toast(response.message);
       props.setOpen(false);
