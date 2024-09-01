@@ -47,10 +47,6 @@ export default function AddPatientModal(props) {
   const [dob, setDob] = useState(dayjs().format("DD/MM/YYYY").toString());
   const [gender, setGender] = useState("");
   const [phone, setPhone] = useState("");
-  const [wallet, setWallet] = useState("");
-  const [unUsedAddresses, setUnUsedAddress] = useState(null);
-  const [controller] = useArgonController();
-  const { auth } = controller;
 
   // React.useEffect(() => {
   //   fetchUnusedAddresses().then((addresses) => {
@@ -70,13 +66,10 @@ export default function AddPatientModal(props) {
       phone: phone,
       gender: gender,
       dob: dob,
-      wallet: wallet,
-      hospitalId: auth.id,
     };
     const response = await createPatient(data);
     if (response.status === "success") {
       toast(response.message);
-      setWallet("");
       props.setOpen(false);
     } else {
       toast(response.message);
@@ -226,45 +219,7 @@ export default function AddPatientModal(props) {
                 </DemoContainer>
               </LocalizationProvider>
             </ArgonBox>
-            <ArgonBox sx={{ minWidth: 120 }}>
-              <FormControl fullWidth>
-                <Select
-                  sx={{
-                    padding: 2,
-                    paddingLeft: 0,
-                    "& .MuiSelect-icon": {
-                      right: 12,
-                      pointerEvents: "none", // Disable pointer events on the icon
-                    },
-                    "& .MuiSelect-root:focus .MuiSelect-icon": {
-                      color: "primary.main", // Change the icon color when the component is focused
-                    },
-                    "& .MuiSelect-root.Mui-disabled .MuiSelect-icon": {
-                      color: "rgba(0, 0, 0, 0.26)", // Change the icon color when the component is disabled
-                    },
-                  }}
-                  displayEmpty // Display the selected value when no option is selected
-                  IconComponent={ArrowDropDownIcon}
-                  value={wallet}
-                  onChange={(event) => {
-                    setWallet(event.target.value);
-                  }}
-                >
-                  <MenuItem sx={{ width: "100%" }} value={""}>
-                    Select Address
-                  </MenuItem>
 
-                  {unUsedAddresses &&
-                    unUsedAddresses.map((item, key) => {
-                      return (
-                        <MenuItem sx={{ width: "100%" }} key={key} value={item}>
-                          {item}
-                        </MenuItem>
-                      );
-                    })}
-                </Select>
-              </FormControl>
-            </ArgonBox>
 
             <Stack mt={4} mb={1} direction={"row"} gap={2}>
               <ArgonButton color="secondary" size="medium" onClick={handleClose} fullWidth>
