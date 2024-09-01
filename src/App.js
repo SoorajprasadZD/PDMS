@@ -152,8 +152,8 @@ export default function App() {
           />
           <Route
             exact
-            path="/authentication/hospital/sign-in"
-            element={<SignIn role="Hospital" title="Hosptail Sign In" />}
+            path="/authentication/doctor/sign-in"
+            element={<SignIn role="Doctor" title="Doctor Sign In" />}
             key="hospital-sign-in"
           />
           <Route
@@ -174,7 +174,7 @@ export default function App() {
 
           {/* if hospital is logged in and any random route is accessed the page is redirected to hospital dashboard */}
           {auth.role === "doctor" && (
-            <Route path="*" element={<Navigate to="/hospital/patients" />} />
+            <Route path="*" element={<Navigate to="/doctor/patients" />} />
           )}
 
           {/* if insurance is logged in and any random route is accessed the page is redirected to insurance dashboard */}

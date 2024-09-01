@@ -69,11 +69,11 @@ function Configurator() {
           </ArgonBox>
           <ArgonBox mb={2}>
             <ArgonButton
-              onClick={() => {navigate("/authentication/hospital/sign-in");}}
+              onClick={() => {navigate("/authentication/doctor/sign-in");}}
               color="primary"
               fullWidth
             >
-              Hospital Sign In
+              Doctor Sign In
             </ArgonButton>
           </ArgonBox>
           <ArgonBox mb={2}>

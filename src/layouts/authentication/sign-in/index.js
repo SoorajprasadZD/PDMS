@@ -10,7 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 // Authentication layout components
 import IllustrationLayout from "layouts/authentication/components/IllustrationLayout";
 import { adminLoginService } from "services/loginService";
-import { hospitalLoginService } from "services/loginService";
+import { doctorLoginService } from "services/loginService";
 import { patientLoginService } from "services/loginService";
 import { insuranceLoginService } from "services/loginService";
 
@@ -32,7 +32,7 @@ Illustration.propTypes = {
 
 const insuranceBG =
   "https://images.pexels.com/photos/16282318/pexels-photo-16282318/free-photo-of-a-person-filling-in-documents.jpeg?auto=compress&cs=tinysrgb&w=1600";
-const hospitalBG =
+const doctorBG =
   "https://images.pexels.com/photos/6320167/pexels-photo-6320167.jpeg?auto=compress&cs=tinysrgb&w=1600";
 const patientBG =
   "https://images.pexels.com/photos/695953/pexels-photo-695953.jpeg?auto=compress&cs=tinysrgb&w=1600";
@@ -73,14 +73,14 @@ function Illustration({ role, title }) {
             toast(error.message);
           }
           break;
-        case "Hospital":
+        case "Doctor":
           try {
-            const response = await hospitalLoginService({ email, password, role: "doctor" });
+            const response = await doctorLoginService({ email, password, role: "doctor" });
             const auth = JSON.parse(localStorage.getItem("auth"));
             console.log(response);
             console.log(auth);
             await setAuth(dispatch, auth);
-            navigate("/hospital/patients");
+            navigate("/doctor/patients");
           } catch (error) {
             toast(error.message);
           }
@@ -107,8 +107,8 @@ function Illustration({ role, title }) {
       ? adminBG
       : role === "Patient"
       ? patientBG
-      : role === "Hospital"
-      ? hospitalBG
+      : role === "Doctor"
+      ? doctorBG
       : insuranceBG;
 
   const handleConfiguratorOpen = () => setOpenConfigurator(dispatch, !openConfigurator);

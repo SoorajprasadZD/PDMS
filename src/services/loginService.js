@@ -20,7 +20,7 @@ export const adminLoginService = async (data) => {
     }
   };
 
-  export const hospitalLoginService = async (data) => {
+  export const doctorLoginService = async (data) => {
     try {
       const response = await axios.post("http://localhost:5000/doctors/sign-in", data);
       console.log(response)
