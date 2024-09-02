@@ -29,7 +29,6 @@ const doctorsData = (doctorsData) => {
   const columns = [
     { name: "doctor", align: "left" },
     { name: "phone", align: "center" },
-    { name: "email", align: "center" },
     { name: "state", align: "center" },
     { name: "address", align: "center" },
   ]
@@ -45,11 +44,6 @@ const doctorsData = (doctorsData) => {
       phone: (
         <ArgonTypography variant="caption" color="secondary" fontWeight="medium">
          {doctor.phone}
-        </ArgonTypography>
-      ),
-      email: (
-        <ArgonTypography variant="caption" color="text" fontWeight="medium">
-          {doctor.doctor}
         </ArgonTypography>
       ),
       address: (
