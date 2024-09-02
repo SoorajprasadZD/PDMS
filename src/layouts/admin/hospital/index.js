@@ -11,7 +11,7 @@ import Table from "examples/Tables/Table";
 
 // Data
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import hospitalTableData from "layouts/admin/hospital/data/hospitalTableData";
+import { doctorsData } from "layouts/admin/hospital/data/doctorsTableData";
 import { Stack } from "@mui/material";
 import ArgonButton from "components/ArgonButton";
 import AddHospitalModal from "layouts/admin/hospital/modal/addHospital";
@@ -25,7 +25,7 @@ function Hospital() {
 
   useEffect(() => {
     fetchAllDoctors().then((response) => {
-      const { columns, rows } = hospitalTableData(response.data);
+      const { columns, rows } = doctorsData(response);
       setColumns(columns);
       setRows(rows);
     });
