@@ -12,7 +12,7 @@ export const adminLoginService = async (data) => {
   
   export const patientLoginService = async (data) => {
     try {
-      const response = await axios.post("http://localhost:5000/patient/sign-in", data);
+      const response = await axios.post("http://localhost:5000/patients/sign-in", data);
       localStorage.setItem("auth", JSON.stringify({ role: response.data.data.role, id: response.data.data.patientId }));
       return response.data;
     } catch (error) {
