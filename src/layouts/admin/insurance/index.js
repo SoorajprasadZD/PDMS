@@ -24,7 +24,7 @@ function Insurance() {
 
   useEffect(() => {
     fetchAllInsurances().then((response) => {
-      const { columns, rows } = insuranceTableData(response.data);
+      const { columns, rows } = insuranceTableData(response);
       setColumns(columns);
       setRows(rows);
     });
