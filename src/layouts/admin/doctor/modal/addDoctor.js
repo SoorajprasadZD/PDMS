@@ -143,7 +143,7 @@ export default function AddHospitalModal(props) {
                 Cancel
               </ArgonButton>
               <ArgonButton color="dark" size="medium" onClick={handleSubmit} fullWidth>
-                Create Hospital
+                Create Doctor
               </ArgonButton>
             </Stack>
             <ArgonBox mt={3} textAlign="center"></ArgonBox>
