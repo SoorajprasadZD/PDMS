@@ -16,7 +16,7 @@ import { Stack } from "@mui/material";
 import ArgonButton from "components/ArgonButton";
 import AddHospitalModal from "layouts/admin/hospital/modal/addHospital";
 import { useEffect, useState } from "react";
-import { fetchAllHospitals } from "services/admin/fetchAllHospitals";
+import { fetchAllDoctors } from "services/admin/fetchAllDoctors";
 
 function Hospital() {
   const [columns, setColumns] = useState([]);
@@ -24,7 +24,7 @@ function Hospital() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    fetchAllHospitals().then((response) => {
+    fetchAllDoctors().then((response) => {
       const { columns, rows } = hospitalTableData(response.data);
       setColumns(columns);
       setRows(rows);

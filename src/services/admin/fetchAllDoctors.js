@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const fetchAllHospitals = async () => {
+export const fetchAllDoctors = async () => {
     try {
       const response = await axios.get("http://localhost:5000/doctors/");
       return response.data.data;
