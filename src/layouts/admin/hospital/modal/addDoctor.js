@@ -45,6 +45,7 @@ export default function AddHospitalModal(props) {
       phone: phone,
     };
     const response = await adminAddDoctor(data);
+
     if (response.success == true) {
       toast(response.message);
       props.setOpen(false);

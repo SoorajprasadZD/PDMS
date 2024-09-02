@@ -8,8 +8,9 @@ export const adminAddDoctor = async (data) => {
           id, role
         }
       });
-      return response.data.data;
+      return response.data;
     } catch (error) {
+      console.log(error.response.data)
       return error.response.data.response;
     }
   };
