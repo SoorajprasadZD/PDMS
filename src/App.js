@@ -48,7 +48,7 @@ export default function App() {
     if (auth.role === "admin") {
       setTmpRoutes(adminRoutes);
       setBrandName("Admin Dash");
-    } else if (auth.role === "hospital") {
+    } else if (auth.role === "doctor") {
       setTmpRoutes(hospitalRoutes);
       setBrandName("Hospital Dash");
     } else if (auth.role === "insurance") {
