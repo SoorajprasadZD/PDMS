@@ -1,9 +1,10 @@
 import axios from "axios";
+import { BASE_URL } from "config/config";
 
 export const authorizeDoctor = async (data) => {
     try {
     const { id, role } = JSON.parse(localStorage.getItem("auth"));
-      const response = await axios.post("http://localhost:5000/patients/authorize-doctor",data,{
+      const response = await axios.post(`${BASE_URL}/patients/authorize-doctor`,data,{
         headers: {
           id,
           role,

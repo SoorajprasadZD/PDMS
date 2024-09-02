@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.50c57edb.css",
-    "main.js": "/static/js/main.a54a45a7.js",
+    "main.js": "/static/js/main.1161ed98.js",
     "static/media/nucleo-icons.svg": "/static/media/nucleo-icons.01ebecaf50461162d4bc.svg",
     "static/media/logo-ct-dark.png": "/static/media/logo-ct-dark.52825f6413dbe5ad9abf.png",
     "static/media/logo-ct.png": "/static/media/logo-ct.52825f6413dbe5ad9abf.png",
@@ -13,6 +13,6 @@
   },
   "entrypoints": [
     "static/css/main.50c57edb.css",
-    "static/js/main.a54a45a7.js"
+    "static/js/main.1161ed98.js"
   ]
 }
