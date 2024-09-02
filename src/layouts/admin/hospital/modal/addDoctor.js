@@ -3,17 +3,11 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-
 import ArgonBox from "components/ArgonBox";
 import ArgonInput from "components/ArgonInput";
 import ArgonButton from "components/ArgonButton";
 import { Stack } from "@mui/material";
 import { useState } from "react";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { fetchUnusedAddresses } from "services/admin/fetchWalletAddres";
 import { useArgonController } from "context";
 import { adminAddDoctor } from "services/admin/addDoctor";
 import { ToastContainer, toast } from "react-toastify";
@@ -37,10 +31,7 @@ export default function AddHospitalModal(props) {
   const [address, setAddress] = useState("");
   const [state, setState] = useState("");
   const [phone, setPhone] = useState("");
-  const [wallet, setWallet] = useState("");
-  const [unUsedAddresses, setUnUsedAddress] = useState(null);
   const [controller] = useArgonController();
-  const { auth } = controller;
 
   const handleClose = () => props.setOpen(false);
 
@@ -54,9 +45,8 @@ export default function AddHospitalModal(props) {
       phone: phone,
     };
     const response = await adminAddDoctor(data);
-    if (response.status === "success") {
+    if (response.success == true) {
       toast(response.message);
-      setWallet("");
       props.setOpen(false);
     } else {
       toast(response.message);
