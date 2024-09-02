@@ -56,7 +56,7 @@ const doctorsData = (doctorsData) => {
       registrationUrl: (
         <ArgonTypography variant="caption" color="secondary" fontWeight="medium" >
 
-          <a href="#" onClick={()=>{
+          <a href={doctor.faceRegistrationLink} onClick={()=>{
           navigator.clipboard.writeText(doctor.faceRegistrationLink);
         }}>copy</a>
 
