@@ -17,8 +17,6 @@ const insuranceCompanyImageUrl =
   "https://img.freepik.com/premium-vector/concept-vector-illustration-life-insurance-protection-health-life-flat-vector-illustration_98702-1374.jpg";
 
 function HospitalInsuranceList({ title, list, type }) {
-
-  console.log(list)
   const renderProfiles = list.map(({ name, email }, index) => (
 
     <ArgonBox key={index} component="li" display="flex" alignItems="center" py={1} mb={1}>

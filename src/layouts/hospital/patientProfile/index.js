@@ -11,7 +11,7 @@ import ProfileInfoCard from "layouts/hospital/patientProfile/components/ProfileI
 import Header from "layouts/hospital/patientProfile/components/Header";
 
 // Data
-import HospitalInsuranceList from "layouts/hospital/patientProfile/components/hospitalInsuranceList";
+import DoctorInsuranceList from "layouts/hospital/patientProfile/components/doctorInsuranceList";
 import ReportInformation from "layouts/hospital/patientProfile/components/ReportInformation";
 import { useParams } from "react-router-dom";
 import { fetchPatientProfile } from "services/common/fetchPatient";
@@ -83,8 +83,8 @@ function Overview() {
             />
           </Grid>
           <Grid item xs={12} xl={8}>
-            <HospitalInsuranceList
-              title={reportType === "hospital" ? "Authorized Hospitals" : "Authorized Insurances"}
+            <DoctorInsuranceList
+              title={reportType === "hospital" ? "Authorized Doctors" : "Authorized Insurances"}
               list={reportType === "hospital" ? hospitalListData : insuranceListData}
               type={reportType}
               open={open}
