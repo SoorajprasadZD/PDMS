@@ -19,9 +19,9 @@ const insuranceCompanyImageUrl =
 function HospitalInsuranceList({ title, list, type }) {
 
   console.log(list)
-  const renderProfiles = list.map(({ name, email }) => (
+  const renderProfiles = list.map(({ name, email }, index) => (
 
-    <ArgonBox key={name} component="li" display="flex" alignItems="center" py={1} mb={1}>
+    <ArgonBox key={index} component="li" display="flex" alignItems="center" py={1} mb={1}>
       <ArgonBox mr={2}>
         <ArgonAvatar src={type === "hospital" ? hospitalImageUrl : insuranceCompanyImageUrl} alt="something here" variant="rounded" shadow="md" />
       </ArgonBox>
