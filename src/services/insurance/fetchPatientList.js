@@ -7,4 +7,4 @@ export const fetchPatientReports = async (patientId,insuranceCompanyIdAsSender) 
   } catch (error) {
     throw error.response.data;
   }
-  };
+};
