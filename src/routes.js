@@ -11,7 +11,7 @@ import PatientProfilePatient from "layouts/patient/patientProfile";
 export const adminRoutes = [
   {
     type: "route",
-    name: "Hospital",
+    name: "Doctors",
     key: "hospitals",
     route: "admin/hospitals",
     icon: <ArgonBox component="i" color="error" fontSize="14px" className="ni ni-building" />,
