@@ -30,8 +30,7 @@ const insuranceTableData = (insurancesArray) => {
     { name: "insurance", align: "left" },
     { name: "phone", align: "center" },
     { name: "state", align: "center" },
-    { name: "wallet", align: "center" },
-    { name: "date", align: "left" },
+    { name: "address", align: "center" },
   ];
 
   const rows = insurancesArray.map((insurance, key) => {
@@ -41,12 +40,12 @@ const insuranceTableData = (insurancesArray) => {
           key={key}
           image={insuranceCompanyImageUrl}
           name={insurance.name}
-          email="insurance@abccom"
+          email={insurance.email}
         />
       ),
       phone: (
         <ArgonTypography variant="caption" color="secondary" fontWeight="medium">
-          {insurance.mobile}
+          {insurance.phone}
         </ArgonTypography>
       ),
       state: (
@@ -60,9 +59,9 @@ const insuranceTableData = (insurancesArray) => {
           {insurance.wallet}
         </ArgonTypography>
       ),
-      date: (
+      address: (
         <ArgonTypography variant="caption" color="secondary" fontWeight="medium">
-          {insurance.createdAt.substring(0, 10)}
+          {insurance.address}
         </ArgonTypography>
       ),
     };

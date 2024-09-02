@@ -2,9 +2,14 @@ import axios from "axios";
 
 export const adminAddInsurance = async (data) => {
     try {
-      const response = await axios.post("http://localhost:5000/admin/create-insurance-company",data);
+      const { id, role } = JSON.parse(localStorage.getItem("auth"));
+      const response = await axios.post("http://localhost:5000/insurances",data, {
+        headers: {
+          id, role
+        }
+      });
       return response.data;
     } catch (error) {
-      return error.response.data.response;
+      return error.response.data;
     }
   };

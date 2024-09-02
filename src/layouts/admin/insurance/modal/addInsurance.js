@@ -61,11 +61,9 @@ export default function AddInsuranceModal(props) {
       address: address,
       state: state,
       phone: phone,
-      wallet: wallet,
-      adminId: auth.id
     };
     const response = await adminAddInsurance(data);
-    if(response.status==="success"){
+    if(response.success == true){
       toast(response.message);
       setWallet("")
       props.setOpen(false)
@@ -146,44 +144,6 @@ export default function AddInsuranceModal(props) {
                   setPhone(event.target.value);
                 }}
               />
-            </ArgonBox>
-            <ArgonBox sx={{ minWidth: 120 }}>
-              <FormControl fullWidth>
-                <Select
-                  sx={{
-                    padding: 2,
-                    paddingLeft: 0,
-                    "& .MuiSelect-icon": {
-                      right: 12,
-                      pointerEvents: "none",
-                    },
-                    "& .MuiSelect-root:focus .MuiSelect-icon": {
-                      color: "primary.main",
-                    },
-                    "& .MuiSelect-root.Mui-disabled .MuiSelect-icon": {
-                      color: "rgba(0, 0, 0, 0.26)",
-                    },
-                  }}
-                  displayEmpty
-                  value={wallet}
-                  onChange={(event) => {
-                    setWallet(event.target.value);
-                  }}
-                >
-                  <MenuItem sx={{ width: "35vw" }} value={""}>
-                    Select Address
-                  </MenuItem>
-
-                  {unUsedAddresses &&
-                    unUsedAddresses.map((item, key) => {
-                      return (
-                        <MenuItem sx={{ width: "35vw" }} key={key} value={item}>
-                          {item}
-                        </MenuItem>
-                      );
-                    })}
-                </Select>
-              </FormControl>
             </ArgonBox>
             <Stack mt={4} mb={1} direction={"row"} gap={2}>
               <ArgonButton color="secondary" size="medium" onClick={handleClose} fullWidth>
