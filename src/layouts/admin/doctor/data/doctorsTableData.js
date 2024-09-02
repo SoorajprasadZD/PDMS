@@ -3,6 +3,7 @@
 import ArgonBox from "components/ArgonBox";
 import ArgonTypography from "components/ArgonTypography";
 import ArgonAvatar from "components/ArgonAvatar";
+import Icon from "@mui/material/Icon";
 
 const hospitalImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYhdQu0h19z4DvCi74Fgul3jX3tNL6QqQYaqQwwoEu-Uz1oP-XKUopb7teZoLQjGI7HDp6XwXEPyE&usqp=CAU&ec=48665701";
 
@@ -52,11 +53,20 @@ const doctorsData = (doctorsData) => {
           {(doctor.address).substring(0, 10)}
         </ArgonTypography>
       ),
-      verifyUrl: (
+      registrationUrl: (
         <ArgonTypography variant="caption" color="secondary" fontWeight="medium" onClick={()=>{
-          console.log("url clicked")
+          navigator.clipboard.writeText(doctor.faceRegistrationLink);
         }}>
-          {("url").substring(0, 10)}
+
+          <Icon
+            sx={{
+              lineHeight: 1.2,
+              mr: 0.5,
+            }}
+          >
+            watch_later
+          </Icon>
+
         </ArgonTypography>
       ),
     }
