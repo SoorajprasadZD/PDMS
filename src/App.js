@@ -170,7 +170,7 @@ export default function App() {
           />
 
           {/* if admin is logged in and any random route is accessed the page is redirected to admin dashboard */}
-          {auth.role === "admin" && <Route path="*" element={<Navigate to="/admin/hospitals" />} />}
+          {auth.role === "admin" && <Route path="*" element={<Navigate to="/admin/doctors" />} />}
 
           {/* if hospital is logged in and any random route is accessed the page is redirected to hospital dashboard */}
           {auth.role === "doctor" && (

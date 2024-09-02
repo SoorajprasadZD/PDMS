@@ -12,8 +12,8 @@ export const adminRoutes = [
   {
     type: "route",
     name: "Doctors",
-    key: "hospitals",
-    route: "admin/hospitals",
+    key: "doctors",
+    route: "admin/doctors",
     icon: <ArgonBox component="i" color="error" fontSize="14px" className="ni ni-building" />,
     component: <Hospital />,
   },

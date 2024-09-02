@@ -57,7 +57,7 @@ function Illustration({ role, title }) {
             const response = await adminLoginService({ email, password, role: "admin" });
             const auth = JSON.parse(localStorage.getItem("auth"));
             setAuth(dispatch, auth);
-            navigate("/admin/hospitals");
+            navigate("/admin/doctors");
             toast("login successful");
           } catch (error) {
             toast(error.message);
