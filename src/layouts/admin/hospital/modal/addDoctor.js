@@ -73,7 +73,7 @@ export default function AddHospitalModal(props) {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Add New Hospital
+            Add New Doctor
           </Typography>
           <ArgonBox component="form" role="form" sx={{ mt: 2 }}>
             <ArgonBox mb={2}>
