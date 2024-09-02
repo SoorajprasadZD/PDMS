@@ -54,18 +54,11 @@ const doctorsData = (doctorsData) => {
         </ArgonTypography>
       ),
       registrationUrl: (
-        <ArgonTypography variant="caption" color="secondary" fontWeight="medium" onClick={()=>{
-          navigator.clipboard.writeText(doctor.faceRegistrationLink);
-        }}>
+        <ArgonTypography variant="caption" color="secondary" fontWeight="medium" >
 
-          <Icon
-            sx={{
-              lineHeight: 1.2,
-              mr: 0.5,
-            }}
-          >
-            watch_later
-          </Icon>
+          <a href="#" onClick={()=>{
+          navigator.clipboard.writeText(doctor.faceRegistrationLink);
+        }}>copy</a>
 
         </ArgonTypography>
       ),
