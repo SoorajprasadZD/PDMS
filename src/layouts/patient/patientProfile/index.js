@@ -84,7 +84,7 @@ function Overview() {
           </Grid>
           <Grid item xs={12} xl={8}>
             <DoctorInsuranceList
-              title={reportType === "hospital" ? "Authorized Hospitals" : "Authorized Insurances"}
+              title={reportType === "hospital" ? "Authorized Doctors" : "Authorized Insurances"}
               list={reportType === "hospital" ? hospitalListData : insuranceListData}
               type={reportType}
               open={open}

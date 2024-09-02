@@ -80,7 +80,7 @@ function Header({patientData,setReportType}) {
             <AppBar position="static">
               <Tabs orientation={tabsOrientation} value={tabValue} onChange={handleSetTabValue}>
                 <Tab
-                  label="Authorized Hospitals"
+                  label="Authorized Doctors"
                   onClick={()=>{setReportType("hospital")}}
                   style={{ fontSize: ".8rem", fontWeight: "bold" }}
                   icon={
