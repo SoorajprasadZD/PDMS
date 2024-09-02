@@ -11,6 +11,6 @@ export const adminAddDoctor = async (data) => {
       return response.data;
     } catch (error) {
       console.log(error.response.data)
-      return error.response.data.response;
+      return error.response.data;
     }
   };
