@@ -26,7 +26,7 @@ function ReportInformation({ patientReports, open, setOpen,name }) {
         <ArgonTypography variant="h6" fontWeight="medium">
           Patient Reports
         </ArgonTypography>
-        <ArgonTypography
+        {/* <ArgonTypography
           variant="body2"
           color="secondary"
           onClick={() => {
@@ -47,7 +47,7 @@ function ReportInformation({ patientReports, open, setOpen,name }) {
               &nbsp;{"Add New Report"}&nbsp;
             </ArgonButton>
           </Tooltip>
-        </ArgonTypography>
+        </ArgonTypography> */}
       </ArgonBox>
       <ArgonBox pt={1} pb={2} px={2} sx={{ height: "50vh", overflowY: "scroll" }}>
         <ArgonBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
