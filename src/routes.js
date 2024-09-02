@@ -1,6 +1,6 @@
 // Argon Dashboard 2 MUI components
 import ArgonBox from "components/ArgonBox";
-import Hospital from "layouts/admin/hospital";
+import Hospital from "layouts/admin/doctor";
 import Insurance from "layouts/admin/insurance";
 import PatientGrid from "layouts/hospital/patientGrid";
 import PatientProfile from "layouts/hospital/patientProfile";
