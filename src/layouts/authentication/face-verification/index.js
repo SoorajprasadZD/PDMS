@@ -9,11 +9,11 @@ import { ToastContainer, toast } from "react-toastify";
 
 // Authentication layout components
 import FaceIllustrationLayout from "layouts/authentication/components/FaceIllustrationLayout";
-import { registerFaceService } from "services/common/registerFace";
 
 import { useNavigate } from "react-router-dom";
 import { CameraModal } from "./cameraModal/cameraModal";
 import CircularProgress from "@mui/material/CircularProgress";
+import { verifyFaceService } from "services/common/verifyFace";
 
 FaceVerification.propTypes = {
   role: PropTypes.string,
@@ -41,18 +41,15 @@ function FaceVerification() {
     setScreenshot(screenshot);
     setFaces(faces);
     setIsLoading(false);
-    toast("Face added");
+    toast("Click continue to proceed");
   };
 
   const handleSubmit = async () => {
-    if (!email || !id || !role) {
+    if (!screenshot|| !faces) {
       toast("Invalid URL");
     } else {
       try {
-        const response = await registerFaceService({
-          id,
-          email,
-          role,
+        const response = await verifyFaceService({
           descriptor: Object.values(faces[0].descriptor),
           screenshot,
         });
@@ -78,9 +75,6 @@ function FaceVerification() {
       />
       <FaceIllustrationLayout title={`Face Verification`} description="Verify your face">
         <ArgonBox component="form" role="form">
-          <ArgonBox mb={2}>
-            <ArgonInput type="email" placeholder="Email" size="large" value={email} disabled />
-          </ArgonBox>
           <ArgonBox mb={2} style={{ position: "relative" }}>
             <ArgonButton
               color="info"
@@ -89,7 +83,7 @@ function FaceVerification() {
               disabled={isLoading}
               onClick={() => setIsCameraModalOpen(true)}
             >
-              Add Face
+              Open Camera
             </ArgonButton>
             {isLoading && (
               <CircularProgress size={42} style={{ position: "absolute", right: -55 }} />

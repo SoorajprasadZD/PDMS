@@ -80,7 +80,7 @@ function Illustration({ role, title }) {
             console.log(response);
             console.log(auth);
             await setAuth(dispatch, auth);
-            navigate("/doctor/patients");
+            navigate("/authentication/face-verification");
           } catch (error) {
             toast(error.message);
           }
