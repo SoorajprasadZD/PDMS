@@ -15,7 +15,7 @@ import { useState } from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { fetchUnusedAddresses } from "services/admin/fetchWalletAddres";
 import { useArgonController } from "context";
-import { adminAddHospital } from "services/admin/addHospital";
+import { adminAddDoctor } from "services/admin/addDoctor";
 import { ToastContainer, toast } from "react-toastify";
 
 const style = {
@@ -42,12 +42,6 @@ export default function AddHospitalModal(props) {
   const [controller] = useArgonController();
   const { auth } = controller;
 
-  React.useEffect(() => {
-    fetchUnusedAddresses().then((addresses) => {
-      setUnUsedAddress(addresses.data.addresses);
-    });
-  }, [props.open]);
-
   const handleClose = () => props.setOpen(false);
 
   const handleSubmit = async () => {
@@ -58,10 +52,8 @@ export default function AddHospitalModal(props) {
       address: address,
       state: state,
       phone: phone,
-      wallet: wallet,
-      adminId: auth.id,
     };
-    const response = await adminAddHospital(data);
+    const response = await adminAddDoctor(data);
     if (response.status === "success") {
       toast(response.message);
       setWallet("");
@@ -144,46 +136,6 @@ export default function AddHospitalModal(props) {
                 }}
               />
             </ArgonBox>
-            <ArgonBox sx={{ minWidth: 120 }}>
-              <FormControl fullWidth size="small">
-                <Select
-                  sx={{
-                    padding: 2,
-                    paddingLeft: 0,
-                    "& .MuiSelect-icon": {
-                      right: 12,
-                      pointerEvents: "none", // Disable pointer events on the icon
-                    },
-                    "& .MuiSelect-root:focus .MuiSelect-icon": {
-                      color: "primary.main", // Change the icon color when the component is focused
-                    },
-                    "& .MuiSelect-root.Mui-disabled .MuiSelect-icon": {
-                      color: "rgba(0, 0, 0, 0.26)", // Change the icon color when the component is disabled
-                    },
-                  }}
-                  displayEmpty // Display the selected value when no option is selected
-                  IconComponent={ArrowDropDownIcon}
-                  value={wallet && wallet}
-                  onChange={(event) => {
-                    setWallet(event.target.value);
-                  }}
-                >
-                  <MenuItem sx={{ width: "35vw" }} value={""}>
-                    Select Address
-                  </MenuItem>
-
-                  {unUsedAddresses &&
-                    unUsedAddresses.map((item, key) => {
-                      return (
-                        <MenuItem sx={{ width: "35vw" }} key={key} value={item}>
-                          {item}
-                        </MenuItem>
-                      );
-                    })}
-                </Select>
-              </FormControl>
-            </ArgonBox>
-
             <ArgonBox mb={2}>
               {/* <ArgonInput
                 type="select"

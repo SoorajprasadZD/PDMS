@@ -14,7 +14,7 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import doctorsData from "layouts/admin/hospital/data/doctorsTableData";
 import { Stack } from "@mui/material";
 import ArgonButton from "components/ArgonButton";
-import AddHospitalModal from "layouts/admin/hospital/modal/addHospital";
+import AddHospitalModal from "layouts/admin/hospital/modal/addDoctor";
 import { useEffect, useState } from "react";
 import { fetchAllDoctors } from "services/admin/fetchAllDoctors";
 
