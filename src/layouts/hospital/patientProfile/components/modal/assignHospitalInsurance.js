@@ -99,7 +99,7 @@ export default function AssignHospitalInsuranceModal({ open, setOpen, type }) {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            {type === "hospital" ? "Assign New Hospital" : "Assign New Insurance"}
+            {type === "hospital" ? "Assign New Doctor" : "Assign New Insurance"}
           </Typography>
           <ArgonBox component="form" role="form" sx={{ mt: 2 }}>
             <ArgonBox sx={{ minWidth: 120 }}>
@@ -156,7 +156,7 @@ export default function AssignHospitalInsuranceModal({ open, setOpen, type }) {
                 Cancel
               </ArgonButton>
               <ArgonButton color="dark" size="medium" onClick={handleSubmit} fullWidth>
-                {type === "hospital" ? "Assign Hospital" : "Assign Insurance"}
+                {type === "hospital" ? "Assign Doctor" : "Assign Insurance"}
               </ArgonButton>
             </Stack>
             <ArgonBox mt={3} textAlign="center"></ArgonBox>
