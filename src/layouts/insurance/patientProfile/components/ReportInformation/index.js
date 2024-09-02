@@ -30,9 +30,9 @@ function ReportInformation({ patientReports}) {
                 description={item.description}
                 doctor={item.doctor}
                 medication={item.medication}
-                hospitalId={item.hospitalId}
-                reportId={item.reportId}
-                hospitalName={item.hospitalName}
+                hospitalId={"d82971db-33b3-43ca-ab88-07de1ff71184"}
+                reportId={item.medicalReportId}
+                hospitalName={"PDMS"}
               />
             );
           })}
