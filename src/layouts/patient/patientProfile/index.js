@@ -40,17 +40,17 @@ function Overview() {
     fetchPatientProfile(id).then((response) => {
       setPateientProfile(response.data);
     });
-    fetchAuthorisedHospitals(id, auth.id).then((response) => {
-      setHospitalListData(response.data.authorizedHospitals);
+    fetchAuthorisedHospitals(id).then((response) => {
+      setHospitalListData(response);
     });
-    fetchAuthorisedInsurances(id, auth.id).then((response) => {
-      setInsuranceListData(response.data.authorizedInsuranceCompanies);
+    fetchAuthorisedInsurances(id).then((response) => {
+      setInsuranceListData(response);
     });
   }, [open]);
 
   useEffect(() => {
     fetchPatientReports(id, auth.id).then((response) => {
-      setPatientReports(response.data.reports.reverse());
+      setPatientReports(response.reverse());
     });
   }, [openReport]);
 
