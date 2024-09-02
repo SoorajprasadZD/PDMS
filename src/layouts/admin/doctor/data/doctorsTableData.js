@@ -32,7 +32,7 @@ const doctorsData = (doctorsData) => {
     { name: "phone", align: "center" },
     { name: "state", align: "center" },
     { name: "address", align: "center" },
-    { name: "verifyUrl", align: "center" },
+    { name: "registrationUrl", align: "center" },
   ]
 
   const rows = doctorsData.map((doctor, key) => {
