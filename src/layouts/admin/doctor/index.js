@@ -39,7 +39,7 @@ function Hospital() {
           <Card style={{ height: "85vh", overflowY: "scroll" }}>
             <Stack direction="row" justifyContent="space-between">
               <ArgonBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
-                <ArgonTypography variant="h6">Hospital List</ArgonTypography>
+                <ArgonTypography variant="h6">Doctors List</ArgonTypography>
               </ArgonBox>
               <ArgonBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
                 <ArgonButton
@@ -53,7 +53,7 @@ function Hospital() {
                   }}
                 >
                   <Icon sx={{ fontWeight: "bold" }}>add</Icon>
-                  &nbsp;{"Add Hospital"}&nbsp;
+                  &nbsp;{"Add Doctor"}&nbsp;
                 </ArgonButton>
               </ArgonBox>
             </Stack>
