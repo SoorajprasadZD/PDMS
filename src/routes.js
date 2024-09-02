@@ -19,7 +19,7 @@ export const adminRoutes = [
   },
   {
     type: "route",
-    name: "Insurance Company",
+    name: "Insurances",
     key: "insurance-companies",
     route: "admin/insurance-companies",
     icon: <ArgonBox component="i" color="warning" fontSize="14px" className="ni ni-credit-card" />,
