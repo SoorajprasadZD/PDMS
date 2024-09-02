@@ -31,6 +31,7 @@ const doctorsData = (doctorsData) => {
     { name: "phone", align: "center" },
     { name: "state", align: "center" },
     { name: "address", align: "center" },
+    { name: "verifyUrl", align: "center" },
   ]
 
   const rows = doctorsData.map((doctor, key) => {
@@ -49,6 +50,13 @@ const doctorsData = (doctorsData) => {
       address: (
         <ArgonTypography variant="caption" color="secondary" fontWeight="medium">
           {(doctor.address).substring(0, 10)}
+        </ArgonTypography>
+      ),
+      verifyUrl: (
+        <ArgonTypography variant="caption" color="secondary" fontWeight="medium" onClick={()=>{
+          console.log("url clicked")
+        }}>
+          {("url").substring(0, 10)}
         </ArgonTypography>
       ),
     }
