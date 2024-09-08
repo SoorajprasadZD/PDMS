@@ -184,7 +184,7 @@ export default function App() {
 
           {/* if patient is logged in and any random route is accessed the page is redirected to insurance patient */}
           {auth.role === "patient" && (
-            <Route path="*" element={<Navigate to="/patient/profile" />} />
+            <Route path="*" element={<Navigate to={`/patient/profile/${auth.id}`} />} />
           )}
 
           {/* if noone is logged in and any random route is accessed the page is redirected to admin signin */}

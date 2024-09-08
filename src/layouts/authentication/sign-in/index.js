@@ -68,7 +68,8 @@ function Illustration({ role, title }) {
             const response = await patientLoginService({ email, password, role: "patient" });
             const auth = JSON.parse(localStorage.getItem("auth"));
             await setAuth(dispatch, auth);
-            navigate(`/patient/profile/${auth.id}`);
+            // navigate(`/patient/profile/${auth.id}`);
+            navigate("/authentication/face-verification");
           } catch (error) {
             toast(error.message);
           }
@@ -90,7 +91,8 @@ function Illustration({ role, title }) {
             const response = await insuranceLoginService({ email, password, role: "insurance" });
             const auth = JSON.parse(localStorage.getItem("auth"));
             await setAuth(dispatch, auth);
-            navigate("/insurance/patients");
+            // navigate("/insurance/patients");
+            navigate("/authentication/face-verification");
           } catch (error) {
             toast(error.message);
           }

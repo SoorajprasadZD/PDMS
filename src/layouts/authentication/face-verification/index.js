@@ -45,7 +45,7 @@ function FaceVerification() {
   };
 
   const handleSubmit = async () => {
-    if (!screenshot|| !faces) {
+    if (!screenshot || !faces) {
       toast("Invalid URL");
     } else {
       try {
@@ -55,7 +55,11 @@ function FaceVerification() {
         });
         toast(response.message);
         setTimeout(() => {
-          navigate("/");
+          if (role == "patient") {
+            navigate(`/patient/profile/${id}`)
+          } else {
+            navigate("/");
+          }
         }, 3000);
       } catch (error) {
         toast(error.message);
