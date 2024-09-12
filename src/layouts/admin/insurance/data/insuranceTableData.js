@@ -31,6 +31,7 @@ const insuranceTableData = (insurancesArray) => {
     { name: "phone", align: "center" },
     { name: "state", align: "center" },
     { name: "address", align: "center" },
+    { name: "registrationUrl", align: "center" },
   ];
 
   const rows = insurancesArray.map((insurance, key) => {
@@ -62,6 +63,15 @@ const insuranceTableData = (insurancesArray) => {
       address: (
         <ArgonTypography variant="caption" color="secondary" fontWeight="medium">
           {insurance.address}
+        </ArgonTypography>
+      ),
+      registrationUrl: (
+        <ArgonTypography variant="caption" color="secondary" fontWeight="medium" >
+
+          <a target="_blank" rel="noreferrer" href={insurance.faceRegistrationLink} onClick={()=>{
+          navigator.clipboard.writeText(insurance.faceRegistrationLink);
+        }}>copy</a>
+
         </ArgonTypography>
       ),
     };
