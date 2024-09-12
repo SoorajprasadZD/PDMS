@@ -57,7 +57,14 @@ function Illustration({ role, title }) {
             const response = await adminLoginService({ email, password, role: "admin" });
             const auth = JSON.parse(localStorage.getItem("auth"));
             setAuth(dispatch, auth);
-            navigate("/admin/doctors");
+            console.log(response.data);
+            if (response.data.faceVerified == false) {
+              navigate(
+                `/authentication/face-registration?id=${response.data.adminId}&role=admin&email=${email}`
+              );
+            } else {
+              navigate("/authentication/face-verification");
+            }
             toast("login successful");
           } catch (error) {
             toast(error.message);
