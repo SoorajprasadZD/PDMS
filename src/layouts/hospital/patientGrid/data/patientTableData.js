@@ -52,8 +52,11 @@ const patientData = (patientsArray) => {
     { name: "patient", align: "left" },
     { name: "phone", align: "center" },
     { name: "state", align: "center" },
+    { name: "registrationUrl", align: "center" },
     { name: "profile", align: "center" },
   ];
+
+  console.log(patientsArray)
 
   const rows = patientsArray.map((patient, key) => {
     return {
@@ -68,6 +71,15 @@ const patientData = (patientsArray) => {
       phone: (
         <ArgonTypography variant="caption" color="secondary" fontWeight="medium">
          {patient?.phone}
+        </ArgonTypography>
+      ),
+      registrationUrl: (
+        <ArgonTypography variant="caption" color="secondary" fontWeight="medium" >
+
+          <a target="_blank" rel="noreferrer" href={patient?.faceRegistrationLink} onClick={()=>{
+          navigator.clipboard.writeText(patient?.faceRegistrationLink);
+        }}>copy</a>
+
         </ArgonTypography>
       ),
       profile: (<ViewProfile id={patient?.patientId} />),
