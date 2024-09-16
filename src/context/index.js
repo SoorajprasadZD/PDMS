@@ -55,7 +55,7 @@ function reducer(state, action) {
 
 // Argon Dashboard 2 MUI context provider
 function ArgonControllerProvider({ children }) {
-  const auth = JSON.parse(localStorage.getItem("auth")) || {};
+  const auth = JSON.parse(sessionStorage.getItem("auth")) || {};
   const initialState = {
     miniSidenav: false,
     darkSidenav: false,

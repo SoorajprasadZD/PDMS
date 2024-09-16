@@ -15,22 +15,22 @@ function SidenavFooter() {
 
   const handleLogout = ()=>{
     if (auth.role==='admin'){
-      localStorage.setItem("auth", JSON.stringify({ role: "", id: "" }));
+      sessionStorage.setItem("auth", JSON.stringify({ role: "", id: "" }));
       setAuth(dispatch, {})
       navigate("authentication/admin/sign-in");
     }
     if (auth.role==='doctor'){
-      localStorage.setItem("auth", JSON.stringify({ role: "", id: "" }));
+      sessionStorage.setItem("auth", JSON.stringify({ role: "", id: "" }));
       setAuth(dispatch, {})
       navigate('authentication/doctor/sign-in')
     }
     if (auth.role==='insurance'){
-      localStorage.setItem("auth", JSON.stringify({ role: "", id: "" }));
+      sessionStorage.setItem("auth", JSON.stringify({ role: "", id: "" }));
       setAuth(dispatch, {})
       navigate('authentication/insurance/sign-in')
     }
     if (auth.role==='patient'){
-      localStorage.setItem("auth", JSON.stringify({ role: "", id: "" }));
+      sessionStorage.setItem("auth", JSON.stringify({ role: "", id: "" }));
       setAuth(dispatch, {})
       navigate('authentication/patient/sign-in')
     }

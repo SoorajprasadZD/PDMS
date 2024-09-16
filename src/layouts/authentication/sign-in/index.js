@@ -55,7 +55,7 @@ function Illustration({ role, title }) {
         case "Admin":
           try {
             const response = await adminLoginService({ email, password, role: "admin" });
-            const auth = JSON.parse(localStorage.getItem("auth"));
+            const auth = JSON.parse(sessionStorage.getItem("auth"));
             setAuth(dispatch, auth);
             console.log(response.data);
             if (response.data.faceVerified == false) {
@@ -73,7 +73,7 @@ function Illustration({ role, title }) {
         case "Patient":
           try {
             const response = await patientLoginService({ email, password, role: "patient" });
-            const auth = JSON.parse(localStorage.getItem("auth"));
+            const auth = JSON.parse(sessionStorage.getItem("auth"));
             await setAuth(dispatch, auth);
             // navigate(`/patient/profile/${auth.id}`);
             navigate("/authentication/face-verification");
@@ -84,7 +84,7 @@ function Illustration({ role, title }) {
         case "Doctor":
           try {
             const response = await doctorLoginService({ email, password, role: "doctor" });
-            const auth = JSON.parse(localStorage.getItem("auth"));
+            const auth = JSON.parse(sessionStorage.getItem("auth"));
             console.log(response);
             console.log(auth);
             await setAuth(dispatch, auth);
@@ -96,7 +96,7 @@ function Illustration({ role, title }) {
         case "Insurance":
           try {
             const response = await insuranceLoginService({ email, password, role: "insurance" });
-            const auth = JSON.parse(localStorage.getItem("auth"));
+            const auth = JSON.parse(sessionStorage.getItem("auth"));
             await setAuth(dispatch, auth);
             // navigate("/insurance/patients");
             navigate("/authentication/face-verification");

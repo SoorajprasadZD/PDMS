@@ -3,7 +3,7 @@ import { BASE_URL } from "config/config";
 
 export const fetchAuthorisedPatients = async () => {
     try {
-      const { id, role } = JSON.parse(localStorage.getItem("auth"));
+      const { id, role } = JSON.parse(sessionStorage.getItem("auth"));
       const response = await axios.get(`${BASE_URL}/insurances/authorized-patients`,{
         headers:{
           id,role
