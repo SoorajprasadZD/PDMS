@@ -57,8 +57,17 @@ function FaceRegistration() {
           screenshot,
         });
         toast(response.message);
+        let signInPath = "authentication/admin/sign-in"
+
+        if (role === "doctor") {
+          signInPath = "/authentication/doctor/sign-in"
+        } else if (role === "insurance") {
+          signInPath = "/authentication/insurance/sign-in"
+        } else if (role === "patient") {
+          signInPath = "/authentication/patient/sign-in"
+        }
         setTimeout(() => {
-          navigate("/");
+          navigate(signInPath);
         }, 3000);
       } catch (error) {
         toast(error.message);
